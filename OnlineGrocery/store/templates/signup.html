@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+<title>{% block title %}Customer Signup{% endblock title %}</title>
+{% block content %}
+
+
+<div class="container">
+    <div class="row my-3">
+        <div class="col-sm-6 offset-sm-3">
+            <h3 class="mb-3">Customer Signup</h3>
+            <form method="POST" action="/signup" class="shadow p-5">
+                {% if messages %}
+                {% for message in messages %}
+                <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</p>
+                {% endfor %}
+                {% endif %}
+
+                {% csrf_token %}
+
+                {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+                {% endif %}
+
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label form-control-lg" >Name</label>
+                <input name="name" type="text" class="form-control" id="formGroupExampleInput" value="{{value.name}}" placeholder="Enter your name...">
+              </div>
+              <div class="mb-3">
+                <label for="formGroupExampleInput2" class="form-label form-control-lg" >Contact no.</label>
+                <input name="phone" type="text" class="form-control" id="formGroupExampleInput2" value="{{value.phone}}" placeholder="Enter your cantact no...">
+            </div>
+
+            <div class="form-group pt-4">
+                <input type="submit" class="btn btn-dark" value="Signup">
+            </div>
+
+            <div class="text-center">
+                <small>Already have an account ?</small>
+                <a href="/login">Login</a>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
